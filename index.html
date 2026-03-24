@@ -1,0 +1,422 @@
+import React, { useState } from 'react';
+import { 
+  MessageCircle, 
+  User, 
+  Smile, 
+  ArrowRight, 
+  CheckCircle2, 
+  BookOpen, 
+  MapPin, 
+  Briefcase, 
+  ChevronLeft, 
+  ChevronRight,
+  Info
+} from 'lucide-react';
+
+const App = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // Logo Component
+  const LEALogo = () => (
+    <div className="flex items-center gap-2">
+      <div className="bg-blue-500 text-white p-1 rounded-lg">
+        <BookOpen size={18} />
+      </div>
+      <div className="flex flex-col leading-none">
+        <span className="font-bold text-blue-600 text-sm tracking-tighter">LEA</span>
+        <span className="text-[8px] text-green-500 font-semibold uppercase">Academy</span>
+      </div>
+    </div>
+  );
+
+  const pages = [
+    // PAGE 1: COVER
+    {
+      content: (
+        <div className="flex flex-col items-center justify-center h-full text-center p-6 bg-white">
+          <div className="mb-8 p-4 bg-blue-50 rounded-full animate-bounce">
+            <MessageCircle size={64} className="text-blue-500" />
+          </div>
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">Session 1</h1>
+          <h2 className="text-xl font-medium text-blue-500 mb-6 italic">"Introduction"</h2>
+          <div className="w-16 h-1 bg-green-400 rounded-full mb-6"></div>
+          <p className="text-slate-600 font-medium text-lg">Speak and introduce yourself</p>
+          <div className="mt-12 flex gap-4">
+            <span className="text-3xl">💬</span>
+            <span className="text-3xl">👤</span>
+            <span className="text-3xl">😊</span>
+          </div>
+        </div>
+      )
+    },
+    // PAGE 2: GREETINGS
+    {
+      title: "1. Greetings",
+      content: (
+        <div className="p-4 space-y-6">
+          <div className="grid grid-cols-1 gap-3">
+            {[
+              { en: "Hello!", fr: "Bonjour !", time: "General" },
+              { en: "Hi!", fr: "Salut !", time: "Informal" },
+              { en: "Good morning", fr: "Bonjour", time: "Morning" },
+              { en: "Good afternoon", fr: "Bonjour", time: "Afternoon" },
+              { en: "Good evening", fr: "Bonsoir", time: "Evening" }
+            ].map((g, i) => (
+              <div key={i} className="flex items-center justify-between p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-xl shadow-sm">
+                <div>
+                  <p className="font-bold text-slate-800 text-lg">{g.en}</p>
+                  <p className="text-sm text-slate-500 italic">{g.fr}</p>
+                </div>
+                <span className="text-[10px] uppercase font-bold text-blue-400 bg-white px-2 py-1 rounded-md border border-blue-100">{g.time}</span>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-6">
+            <p className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-widest">Mini Dialogue</p>
+            <div className="bg-slate-50 p-4 rounded-2xl space-y-3">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">A</div>
+                <div className="bg-white p-2 rounded-lg rounded-tl-none shadow-sm border border-slate-100">Hello!</div>
+              </div>
+              <div className="flex items-start gap-3 flex-row-reverse">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">B</div>
+                <div className="bg-blue-500 text-white p-2 rounded-lg rounded-tr-none shadow-sm">Hi!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    // PAGE 3: ASKING NAME
+    {
+      title: "2. Asking Name",
+      content: (
+        <div className="p-4 space-y-6">
+          <div className="bg-green-50 p-5 rounded-3xl border-2 border-green-100 relative overflow-hidden">
+            <div className="absolute right-[-10px] top-[-10px] opacity-10">
+              <User size={100} />
+            </div>
+            <p className="text-green-600 font-bold text-sm mb-1 uppercase">The Question</p>
+            <h3 className="text-2xl font-bold text-slate-800 mb-4">What’s your name?</h3>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-slate-500 font-medium">How to answer:</p>
+            <div className="space-y-3">
+              <div className="p-4 bg-white border-2 border-blue-50 rounded-2xl flex items-center gap-3 shadow-sm">
+                <CheckCircle2 className="text-green-500" size={20} />
+                <p className="text-lg">My name is <span className="text-blue-500 font-bold underline">Sarah</span></p>
+              </div>
+              <div className="p-4 bg-white border-2 border-blue-50 rounded-2xl flex items-center gap-3 shadow-sm">
+                <CheckCircle2 className="text-green-500" size={20} />
+                <p className="text-lg">I'm <span className="text-blue-500 font-bold underline">Sarah</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 text-white p-4 rounded-2xl">
+            <div className="flex gap-2 mb-2 italic text-slate-400 text-sm italic">
+               <span className="font-bold text-green-400">A:</span> What's your name?
+            </div>
+            <div className="flex gap-2 font-medium">
+               <span className="font-bold text-blue-400">B:</span> My name is Sarah.
+            </div>
+          </div>
+        </div>
+      )
+    },
+    // PAGE 4: HEALTH STATE
+    {
+      title: "3. Health State",
+      content: (
+        <div className="p-4 space-y-6">
+           <div className="text-center mb-4">
+             <h3 className="text-xl font-bold text-slate-800">How are you?</h3>
+             <p className="text-slate-500 text-sm">Comment vas-tu ?</p>
+           </div>
+
+           <div className="grid grid-cols-2 gap-3">
+             {[
+               { icon: "😊", label: "I'm fine", color: "bg-green-50 border-green-200" },
+               { icon: "👍", label: "I'm good", color: "bg-blue-50 border-blue-200" },
+               { icon: "👌", label: "I'm okay", color: "bg-orange-50 border-orange-200" },
+               { icon: "😴", label: "I'm tired", color: "bg-slate-50 border-slate-200" }
+             ].map((item, i) => (
+               <div key={i} className={`p-4 rounded-2xl border-2 ${item.color} flex flex-col items-center justify-center transition-transform active:scale-95`}>
+                 <span className="text-2xl mb-1">{item.icon}</span>
+                 <span className="font-bold text-slate-700 text-sm">{item.label}</span>
+               </div>
+             ))}
+           </div>
+
+           <div className="bg-blue-600 text-white p-5 rounded-3xl mt-4 shadow-lg">
+             <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">👤</div>
+                <div>
+                  <p className="text-xs text-blue-200">Dialogue</p>
+                  <p className="font-bold">A: How are you?</p>
+                </div>
+             </div>
+             <div className="flex items-center gap-3 justify-end">
+                <div className="text-right">
+                  <p className="text-xs text-blue-200">Reply</p>
+                  <p className="font-bold">B: I'm good, thanks!</p>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">😊</div>
+             </div>
+           </div>
+        </div>
+      )
+    },
+    // PAGE 5: VERB TO BE
+    {
+      title: "4. Verb TO BE",
+      content: (
+        <div className="p-4 space-y-6">
+          <div className="bg-white border-2 border-blue-100 rounded-2xl overflow-hidden shadow-sm">
+            <div className="bg-blue-500 p-3 text-white text-center font-bold">
+              Affirmative Form
+            </div>
+            <div className="divide-y divide-blue-50">
+              <div className="grid grid-cols-2 p-4 items-center">
+                <div className="text-slate-500 font-medium">Full Form</div>
+                <div className="text-blue-600 font-bold text-lg">Short Form</div>
+              </div>
+              <div className="grid grid-cols-2 p-4 items-center bg-blue-50/30">
+                <div className="text-slate-700 font-bold">I am</div>
+                <div className="text-green-600 font-black text-xl flex items-center gap-2">I’m <span className="bg-green-100 text-[10px] px-1 rounded text-green-700">✓</span></div>
+              </div>
+              <div className="grid grid-cols-2 p-4 items-center">
+                <div className="text-slate-700 font-bold">You are</div>
+                <div className="text-green-600 font-black text-xl flex items-center gap-2">You’re <span className="bg-green-100 text-[10px] px-1 rounded text-green-700">✓</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Examples</p>
+             <div className="flex items-center gap-3 p-3 bg-white border border-slate-100 rounded-xl">
+               <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">🎓</div>
+               <p className="font-medium text-slate-700">I am a <span className="text-blue-500 font-bold">student</span></p>
+             </div>
+             <div className="flex items-center gap-3 p-3 bg-white border border-slate-100 rounded-xl">
+               <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">🇨🇬</div>
+               <p className="font-medium text-slate-700">I am <span className="text-green-500 font-bold">Congolese</span></p>
+             </div>
+          </div>
+        </div>
+      )
+    },
+    // PAGE 6: SIMPLE SENTENCES
+    {
+      title: "5. Simple Sentences",
+      content: (
+        <div className="p-4 space-y-4">
+           <p className="text-center text-slate-500 text-sm mb-2">Build your first sentences!</p>
+           
+           <div className="space-y-4">
+              <div className="flex items-center gap-4 p-5 bg-white rounded-3xl border-b-4 border-blue-200 shadow-sm">
+                <div className="p-3 bg-blue-50 rounded-2xl text-blue-500">
+                  <MessageCircle size={24} />
+                </div>
+                <div>
+                  <h4 className="font-black text-xl text-slate-800">I speak French</h4>
+                  <p className="text-sm text-slate-400 italic">Je parle français</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-5 bg-white rounded-3xl border-b-4 border-green-200 shadow-sm">
+                <div className="p-3 bg-green-50 rounded-2xl text-green-500">
+                  <MapPin size={24} />
+                </div>
+                <div>
+                  <h4 className="font-black text-xl text-slate-800">I live in Goma</h4>
+                  <p className="text-sm text-slate-400 italic">J'habite à Goma</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-5 bg-white rounded-3xl border-b-4 border-orange-200 shadow-sm">
+                <div className="p-3 bg-orange-50 rounded-2xl text-orange-500">
+                  <Briefcase size={24} />
+                </div>
+                <div>
+                  <h4 className="font-black text-xl text-slate-800">I work / I study</h4>
+                  <p className="text-sm text-slate-400 italic">Je travaille / J'étudie</p>
+                </div>
+              </div>
+           </div>
+        </div>
+      )
+    },
+    // PAGE 7: FULL INTRODUCTION
+    {
+      title: "6. Full Introduction",
+      content: (
+        <div className="p-4 space-y-6">
+          <div className="bg-blue-600 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full translate-x-10 -translate-y-10"></div>
+            
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <User size={20} className="text-green-300" /> My Presentation
+            </h3>
+            
+            <div className="space-y-4 text-lg font-medium">
+              <p className="border-b border-blue-400/50 pb-2">Hello!</p>
+              <p className="border-b border-blue-400/50 pb-2">My name is <span className="text-green-300">Emmanuel</span>.</p>
+              <p className="border-b border-blue-400/50 pb-2">I am <span className="text-green-300">Congolese</span>.</p>
+              <p className="border-b border-blue-400/50 pb-2">I live in <span className="text-green-300">Goma</span>.</p>
+              <p className="border-b border-blue-400/50 pb-2">I speak <span className="text-green-300">French</span>.</p>
+              <p>Nice to meet you!</p>
+            </div>
+          </div>
+
+          <div className="bg-green-50 p-4 rounded-2xl border border-green-200">
+            <p className="text-green-700 font-bold text-sm mb-1">💪 CHALLENGE :</p>
+            <p className="text-green-600 text-sm">Replace the green words with <span className="italic">YOUR</span> information and record a voice message on WhatsApp!</p>
+          </div>
+        </div>
+      )
+    },
+    // BONUS: EXERCISE
+    {
+      title: "Bonus Exercise",
+      content: (
+        <div className="p-4 space-y-6">
+          <div className="text-center">
+            <h3 className="text-xl font-bold text-slate-800">Quick Test 🧠</h3>
+            <p className="text-slate-500 text-sm italic">Translate to English</p>
+          </div>
+
+          <div className="space-y-4">
+             {[
+               { q: "1. Je m'appelle Jean.", a: "My name is Jean" },
+               { q: "2. J'habite à Kinshasa.", a: "I live in Kinshasa" },
+               { q: "3. Je parle français.", a: "I speak French" },
+               { q: "4. Comment vas-tu ?", a: "How are you?" }
+             ].map((ex, i) => (
+               <div key={i} className="group cursor-pointer">
+                 <div className="p-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-blue-400 transition-colors">
+                    <p className="text-slate-600 font-medium">{ex.q}</p>
+                    <p className="mt-2 text-blue-600 font-bold opacity-0 group-hover:opacity-100 transition-opacity">👉 {ex.a}</p>
+                 </div>
+               </div>
+             ))}
+          </div>
+
+          <div className="bg-blue-50 p-4 rounded-2xl flex items-start gap-3">
+            <Info size={20} className="text-blue-500 mt-1 shrink-0" />
+            <p className="text-xs text-blue-700 leading-relaxed font-medium">
+              Astuce : Touche ou clique sur une carte pour voir la réponse. Répète à voix haute pour pratiquer ta prononciation !
+            </p>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  const next = () => {
+    if (currentPage < pages.length - 1) setCurrentPage(currentPage + 1);
+  };
+
+  const prev = () => {
+    if (currentPage > 0) setCurrentPage(currentPage - 1);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4 font-sans">
+      {/* Mobile Frame Container */}
+      <div className="w-full max-w-[400px] h-[720px] bg-white rounded-[3rem] shadow-2xl border-[8px] border-slate-800 overflow-hidden flex flex-col relative">
+        
+        {/* Notch Area */}
+        <div className="h-6 w-full bg-slate-800 flex justify-center">
+          <div className="w-32 h-4 bg-slate-800 rounded-b-xl"></div>
+        </div>
+
+        {/* Header with Logo */}
+        <header className="p-4 flex items-center justify-between border-b border-slate-100">
+          <LEALogo />
+          <div className="flex items-center gap-1 text-[10px] font-bold text-slate-400">
+             <span>{currentPage + 1}</span>
+             <div className="w-12 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-green-400 transition-all duration-300" 
+                  style={{ width: `${((currentPage + 1) / pages.length) * 100}%` }}
+                ></div>
+             </div>
+             <span>{pages.length}</span>
+          </div>
+        </header>
+
+        {/* Page Title (Hidden on Cover) */}
+        {pages[currentPage].title && (
+          <div className="px-4 pt-4">
+            <h2 className="text-2xl font-black text-slate-800 tracking-tight">
+              {pages[currentPage].title}
+            </h2>
+          </div>
+        )}
+
+        {/* Content Area */}
+        <main className="flex-1 overflow-y-auto custom-scrollbar">
+          {pages[currentPage].content}
+        </main>
+
+        {/* Navigation Footer */}
+        <footer className="p-6 bg-white border-t border-slate-50 flex items-center justify-between">
+          <button 
+            onClick={prev}
+            disabled={currentPage === 0}
+            className={`p-3 rounded-2xl transition-all ${currentPage === 0 ? 'text-slate-200' : 'bg-slate-100 text-slate-600 active:bg-slate-200'}`}
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <button 
+            onClick={next}
+            disabled={currentPage === pages.length - 1}
+            className={`flex items-center gap-2 px-8 py-3 rounded-2xl font-bold transition-all ${
+              currentPage === pages.length - 1 
+              ? 'bg-slate-100 text-slate-300' 
+              : 'bg-green-500 text-white shadow-lg shadow-green-200 active:scale-95'
+            }`}
+          >
+            {currentPage === 0 ? "Let's Start" : currentPage === pages.length - 1 ? "Finished" : "Next"}
+            <ArrowRight size={18} />
+          </button>
+        </footer>
+
+        {/* Floating Accent Elements */}
+        {currentPage === 0 && (
+          <div className="absolute bottom-32 left-0 right-0 pointer-events-none opacity-5">
+             <div className="flex justify-center gap-10">
+                <div className="w-20 h-20 bg-blue-500 rounded-full blur-3xl"></div>
+                <div className="w-20 h-20 bg-green-500 rounded-full blur-3xl"></div>
+             </div>
+          </div>
+        )}
+      </div>
+
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        body {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #e2e8f0;
+          border-radius: 10px;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default App;
